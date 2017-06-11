@@ -24,7 +24,7 @@
  * digitalWrite(1, 6, true);
  */
  
- void digitalWrite(uint8_t, port, uint8_t pin, bool value)
+ void digitalWrite(uint8_t port, uint8_t pin, bool value)
  {
     if (port == 1 && pin < 8)
     {
@@ -59,7 +59,7 @@
  * b = digitalRead(2, 1);
  */
  
- bool digitalRead(uint8_t, port, uint8_t pin)
+ bool digitalRead(uint8_t port, uint8_t pin)
  {
     bool result;
     if (port == 1 && pin < 8)
@@ -75,6 +75,7 @@
     return result;
  }
 
+/*
  * In dit voorbeeld wordt de digitale output pin 1.0 (rode led) 
  * gelijk gemaakt aan de logische AND functie van twee input
  * pins 2.0 en 2.1. Bovendien wordt de digitale output pin 1.6
@@ -89,11 +90,11 @@ int main(void)
     
     while (1) // herhaal voor "altijd" 
     {
-        bool p20 = digitalRead(2, 0);
-        bool p21 = digitalRead(2, 1);
+        bool inputA = digitalRead(2, 0);
+        bool inputB = digitalRead(2, 1);
         
-        bool redLed = p20 && p21; // && betekent logische AND
-        bool greenLed = p20 || p21; // || betekent logische OR
+        bool redLed = inputA && inputB; // && betekent logische AND
+        bool greenLed = inputA || inputB; // || betekent logische OR
         
         digitalWrite(1, 0, redLed);
         digitalWrite(1, 6, greenLed);
